@@ -1,53 +1,33 @@
 {
     "contentGroups": {
-        "Relations Between Greek States": [
-            "Marathon",
-            "Thermopylae",
-            "Artemisium",
-            "Salamis",
-            "Plataea",
-            "Mycale",
-            "Delian League"
-        ],
-        "Politics and Culture of Athens": [
-            "Development of Democracy",
-            "Ekklesia",
-            "Boule",
-            "Magistrates",
-            "Democracy",
-            "Citizens",
-            "Metics",
-            "Slaves",
-            "Women"
-        ],
-        "Breakdown of the Late Republic": [
-            "Cicero",
-            "Sulla",
-            "Lepidus",
-            "Pompey",
-            "Crassus",
-            "Caesar",
-            "Cataline",
-            "Cato",
-            "Marc Antony",
-            "Lepidus (Triumvir)",
-            "Octavian"
-        ],
-        "The Julio-Claudians": [
-            "The Constitutional Settlement 27BC",
-            "The Constitutional Settlement 23BC",
-            "Actium",
-            "Augustus and the Senate",
-            "Augustus and the Eques",
-            "Augustus and the Plebs",
-            "Augustus' Administration of Rome"
-        ]
+        "Ancient History": {
+            "Greek States": [
+                "Marathon",
+                "Thermopylae",
+                "Salamis"
+            ],
+            "Roman Republic": [
+                "Cicero",
+                "Sulla",
+                "Caesar"
+            ]
+        },
+        "Modern History": {
+            "World Wars": [
+                "WWI",
+                "WWII",
+                "Cold War"
+            ],
+            "20th Century Leaders": [
+                "Churchill",
+                "Roosevelt",
+                "Stalin"
+            ]
+        }
     },
     "functionGroup": [
         "Summarise in 5 bullets",
-        "Summarise in 3 bullets",
-        "3 min free recall",
-        "Summarise in one sentence",
-        "Create a visual organiser of"
+        "Explain key impacts",
+        "Compare to another event"
     ]
 }
