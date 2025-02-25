@@ -1,3 +1,4 @@
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -9,7 +10,7 @@ body {
 header {
     background: #007BFF;
     color: white;
-    padding: 15px 20px; /* Adds space inside the header */
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,46 +21,17 @@ header {
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-
-
 header h1 {
     margin: 0;
     font-size: 20px;
 }
 
-/* Sidebar Toggle Button */
-.sidebar-toggle {
-    background: none;
-    border: none;
-    font-size: 22px;
-    color: white;
-    cursor: pointer;
-    padding: 8px 12px; /* Keeps internal space */
-    margin-left: auto; /* Pushes button inward from right edge */
-    margin-right: 15px; /* Creates visible gap */
-    position: relative;
-    display: inline-block; /* Prevents expansion beyond content size */
-    border-radius: 5px;
-    transition: background 0.2s ease-in-out;
-    max-width: 50px; /* Prevents unwanted hover expansion */
-}
-
-/* Hover Effect Without Clipping */
-.sidebar-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px; /* Keeps hover effect contained */
-}
-
-
-
-
-
-/* 🔹 Sidebar */
+/* Sidebar */
 #sidebar {
     position: fixed;
     right: 0;
     top: 0;
-    width: 250px;
+    width: 300px;
     height: 100%;
     background: white;
     box-shadow: -2px 0 5px rgba(0,0,0,0.1);
@@ -79,6 +51,7 @@ header h1 {
     padding: 5px;
 }
 
+/* Close Button */
 .close-btn {
     font-size: 20px;
     background: none;
@@ -88,103 +61,61 @@ header h1 {
     margin: 5px;
 }
 
-/* Expandable Group Styling */
-.group-container {
+/* Expandable Category Styling */
+.category-container {
     border: 1px solid #ddd;
     margin: 5px 0;
     padding: 5px;
     text-align: left;
     cursor: pointer;
     background: #f9f9f9;
+    border-radius: 5px;
 }
 
-.group-title {
+.category-title {
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 5px;
 }
 
-.group-content {
+.category-checkbox {
+    margin-right: 10px;
+}
+
+.category-content {
     display: none;
+    padding-left: 15px;
+}
+
+/* Subcategories */
+.subcategory-container {
+    border-left: 3px solid #007BFF;
+    margin-left: 10px;
     padding-left: 10px;
 }
 
-/* 🔹 Flashcard Layout */
-.container {
-    margin-top: 80px;
-    padding: 20px;
-}
-
-.flashcard-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px;
-    gap: 15px;
-}
-
-.flashcard {
-    width: 90%;
-    max-width: 200px;
-    height: 120px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
+.subcategory-title {
     font-weight: bold;
-    text-align: center;
+    padding: 5px;
 }
 
-/* 🔹 Sidebar Toggle */
+/* Content Checkboxes */
+.content-checkbox {
+    margin-right: 5px;
+}
+
+/* Sidebar Toggle */
 #sidebar.open {
     display: block;
 }
 
-/* 🔹 Mobile Optimization */
+/* Mobile Optimization */
 @media (max-width: 600px) {
     #sidebar {
         width: 100%;
     }
 }
-
-/* 🔹 Collapsible Section */
-.collapsible-container {
-    margin-top: 15px;
-    border: 1px solid #ddd;
-    background: #f9f9f9;
-    padding: 5px;
-    text-align: left;
-    cursor: pointer;
-}
-
-.collapsible-header {
-    padding: 10px;
-    background: #e0e0e0;
-    border-bottom: 1px solid #ccc;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.collapsible-header:hover {
-    background: #d0d0d0;
-}
-
-.collapsible-content {
-    display: none;
-    padding: 10px;
-}
-
-.collapsible-content label {
-    display: block;
-    text-align: left;
-    padding: 5px;
-}
-
-/* Ensures function checkboxes align properly */
-#functionSelection input {
-    margin-right: 5px;
-}
-
