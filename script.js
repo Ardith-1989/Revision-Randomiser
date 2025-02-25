@@ -40,18 +40,23 @@ function createCategoryCheckboxes(parentElement, categories) {
         let categoryTitle = document.createElement("div");
         categoryTitle.classList.add("category-title");
         categoryTitle.textContent = category;
-        categoryTitle.onclick = () => {
-            let contentDiv = container.querySelector(".category-content");
-            contentDiv.style.display = contentDiv.style.display === "block" ? "none" : "block";
-        };
 
         let categoryCheckbox = document.createElement("input");
         categoryCheckbox.type = "checkbox";
         categoryCheckbox.classList.add("category-checkbox");
         categoryCheckbox.dataset.category = category;
-        categoryCheckbox.onchange = () => {
+        categoryCheckbox.onchange = (event) => {
+            event.stopPropagation(); // Prevent dropdown expansion
             let checkboxes = container.querySelectorAll(".content-checkbox");
             checkboxes.forEach(cb => cb.checked = categoryCheckbox.checked);
+        };
+
+        let toggleButton = document.createElement("span");
+        toggleButton.textContent = " ▼";
+        toggleButton.classList.add("toggle-button");
+        toggleButton.onclick = () => {
+            let contentDiv = container.querySelector(".category-content");
+            contentDiv.style.display = contentDiv.style.display === "block" ? "none" : "block";
         };
 
         let contentDiv = document.createElement("div");
@@ -73,6 +78,7 @@ function createCategoryCheckboxes(parentElement, categories) {
         }
 
         categoryTitle.prepend(categoryCheckbox);
+        categoryTitle.appendChild(toggleButton);
         container.appendChild(categoryTitle);
         container.appendChild(contentDiv);
         parentElement.appendChild(container);
