@@ -86,9 +86,8 @@
                 "The Magistrates",
                 "Ostracism",
                 "Critiques of Democracy",
-                "The Athenian Legal System"
-            ],
-            "Athens and her Empire": [
+                "The Athenian Legal System",
+                "Athens and her Empire",
                 "The Mytilene Debate",
                 "Rhetoric in Athenian Politics",
                 "Pericles’ Funeral Oration",
@@ -100,8 +99,69 @@
                 "Metics",
                 "Slaves",
                 "Women"
+            ],
+            "The Influence of New Thinking and Ideas on Athenian Society": [
+                "The Sophists",
+                "Sophists and Rhetoric",
+                "Sophists in Society",
+                "Sophists in the Sources",
+                "Socrates",
+                "Sources on Socrates",
+                "Socrates’ Methods",
+                "The Effects of Socrates on Society",
+                "Socrates and Democracy",
+                "Socrates Trial and Execution"
+            ],
+            "Art and Architecture and their significance in the Culture of Athens": [
+                "The Athenian Building Programme",
+                "The Building Programme and the Persian Wars",
+                "The Acropolis",
+                "The Erectheion",
+                "The Temple of Athena Nike",
+                "The Propylaea",
+                "Statue of Athena Promachos",
+                "The Parthenon",
+                "The Parthenon Sculptures",
+                "The Statue of Athena Parthenos",
+                "The Stoa Poikile",
+                "The Stoa Basileus",
+                "The Stoa of Zeus Eleutherios",
+                "The Hephaestion",
+                "The New Bouleterion",
+                "The Theatre of Dionysus",
+                "The Odeon of Pericles",
+                "The Sanctuary of Artemis at Brauron",
+                "The Sanctuary of Eleusis",
+                "The Sanctuary of Nemesis at Rhamnous",
+                "The Temple at Souneion",
+                "The Stoa of Thorikos"
+            ],
+            "Drama and Dramatic Festivals and their significance in the Culture of Athens": [
+                "The City Dionysia",
+                "The Lenaia",
+                "The Significance of Dramatic Festivals",
+                "Tragedy as a Genre",
+                "Comedy as a Genre",
+                "Comedy and Contemporary Events",
+                "Aristophanes",
+                "Euripides’ Hippolytus"
+            ],
+            "Religion and its significance in the Culture of Athens": [
+                "Features of Athenian Religion",
+                "Traditional Attitudes toward Religion",
+                "Sophist Challenges to Religion",
+                "Religion and Drama",
+                "Religious Festivals",
+                "The City Dionysia",
+                "The Thesmophoria",
+                "The Eleusinian Mysteries",
+                "The Panathenaea",
+                "The Panathenaea on the Parthenon Frieze",
+                "Athena in Athenian Religion",
+                "Poseidon in Athenian Religion"
             ]
-        },
+        }
+    },
         "Breakdown of the Late Republic": {
             "The Roman Constitution": [
                 "Government of Republican Rome",
