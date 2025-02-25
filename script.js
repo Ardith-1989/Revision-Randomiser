@@ -45,22 +45,23 @@ function createCategoryCheckboxes(parentElement, categories) {
         categoryCheckbox.type = "checkbox";
         categoryCheckbox.classList.add("category-checkbox");
         categoryCheckbox.dataset.category = category;
-        categoryCheckbox.onchange = (event) => {
-            event.stopPropagation(); // Prevent dropdown expansion
+        categoryCheckbox.onclick = (event) => {
+            event.stopPropagation(); // Prevent dropdown expansion when clicking checkbox
+        };
+        categoryCheckbox.onchange = () => {
             let checkboxes = container.querySelectorAll(".content-checkbox");
             checkboxes.forEach(cb => cb.checked = categoryCheckbox.checked);
         };
 
-        let toggleButton = document.createElement("span");
-        toggleButton.textContent = " ▼";
-        toggleButton.classList.add("toggle-button");
-        toggleButton.onclick = () => {
-            let contentDiv = container.querySelector(".category-content");
-            contentDiv.style.display = contentDiv.style.display === "block" ? "none" : "block";
-        };
-
         let contentDiv = document.createElement("div");
         contentDiv.classList.add("category-content");
+
+        categoryTitle.prepend(categoryCheckbox);
+        categoryTitle.onclick = (event) => {
+            if (!event.target.classList.contains("category-checkbox")) {
+                contentDiv.style.display = contentDiv.style.display === "block" ? "none" : "block";
+            }
+        };
 
         if (Array.isArray(items)) {
             items.forEach(item => {
@@ -77,8 +78,6 @@ function createCategoryCheckboxes(parentElement, categories) {
             createCategoryCheckboxes(contentDiv, items); // Recursive call for deeper nesting
         }
 
-        categoryTitle.prepend(categoryCheckbox);
-        categoryTitle.appendChild(toggleButton);
         container.appendChild(categoryTitle);
         container.appendChild(contentDiv);
         parentElement.appendChild(container);
