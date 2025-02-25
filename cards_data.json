@@ -25,9 +25,57 @@
                 "Themistocles and Cimon, 478-461 BC",
                 "Sparta’s Internal Problems, 478-461 BC",
                 "The Revolt of Thasos, 465 BC",
-                "The Helot Revolt, c. 464 BC"
+                "The Helot Revolt, c. 464 BC",
+                "The First Peloponnesian War, 461-446 BC",
+                "The Delian League in Egypt, 461-454 BC",
+                "Pericles and Athens’ Increasing control of the Delian League, 461-454 BC",
+                "Cimon in Cyprus, 451-450 BC",
+                "The Spartan Invasion of Attica, 446 BC",
+                "The Chalkis Decree, c. 446 BC"
+            ],
+            "Peace and Conflict, 446-431 BC": [
+                "The Thirty Year Peace, 446 BC",
+                "The Revolt of Samos, 440-439 BC",
+                "The Epidamnus Affair, c. 436-433 BC",
+                "Potidaea, c. 433-432 BC",
+                "The Megarian Decree, c. 432 BC",
+                "Other Conflicts before the War in 431 BC",
+                "The Assemblies at Sparta, c. 432 BC",
+                "The Causes of the Peloponnesian War"
+            ],
+            "The Archidamian War, 431-421 BC": [
+                "Athens’ Strategies in the Early War",
+                "Sparta’s Strategies in the Early War",
+                "The Invasions of Attica and the Plague, 431-429 BC",
+                "The Revolt of Lesbos, c. 428 BC",
+                "The Destruction of Plataea, 427 BC",
+                "The Civil War in Corcyra, 427 BC",
+                "Tribute Reassessments, c. 426-425 BC",
+                "Pylos and Sphacteria, 425 BC",
+                "Brasidas’ Campaign in Thrace, 424 BC",
+                "Attitudes in Athens and Sparta, 424-422 BC",
+                "The Peace of Nicias, 421 BC",
+                "Problems with the Peace of Nicias"
+            ],
+            "The End of the Peloponnesian War, 421-404 BC": [
+                "Changing Alliances, 421-417 BC",
+                "Athens and Melos, 416 BC",
+                "The Lead up to the Sicilian Expedition, c. 415 BC",
+                "The Sicilian Expedition, 415-413 BC",
+                "The Occupation of Decelea, c. 413 BC",
+                "The Impact of the Sicilian Expedition",
+                "The Treaty of Miletus, 412 BC",
+                "The Oligarchic Coup, 411 BC",
+                "Athenian Victories in the Aegean, 411-406 BC",
+                "Sparta’s Rebuilding of the Fleet, 410-407 BC",
+                "Cyrus’ Role in the Later War",
+                "The Battle of Notium, 406 BC",
+                "The Battle of Arginusae, 406 BC",
+                "The Battle of Aegospotami, 405 BC",
+                "The End of the War, 405-404 BC",
+                "The Reasons for Athens’ Defeat"
             ]
-        },
+        }
         "The Politics and Culture of Athens": {
             "Athenian Political and Social Culture": [
                 "Athens and Attica",
