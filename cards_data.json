@@ -161,7 +161,7 @@
                 "Poseidon in Athenian Religion"
             ]
         },
-        "Breakdown of the Late Republic": {
+        "The Breakdown of the Late Republic": {
             "The Roman Constitution": [
                 "Government of Republican Rome",
                 "The Senate",
@@ -170,7 +170,11 @@
                 "The Legal System",
                 "Slavery",
                 "Women",
-                "The Patronage System"
+                "The Patronage System",
+                "Ager Publicus",
+                "Tiberius Gracchus",
+                "Gaius Gracchus",
+                "Marius"
             ],
             "Means of Achieving Success": [
                 "Patron-Client Relationships",
@@ -189,6 +193,90 @@
                 "Army/Veteran Support",
                 "Rhetoric/Oratory",
                 "Political Marriages and Scandals"
+            ],
+            "Social and Economic Relationships": [
+                "Social Structure",
+                "The Changing Role of the Poor",
+                "Patron-Client Relationships",
+                "Inequality of Wealth",
+                "Land Reform",
+                "Migration of the rural poor to Rome",
+                "Largesse",
+                "Land Bills",
+                "Corn Doles",
+                "Spartacus’ Slave Revolt"
+            ],
+            "Roles of Individuals": [
+                "Sulla",
+                "Lepidus",
+                "Pompey",
+                "Cicero",
+                "Crassus",
+                "Catiline",
+                "Caesar",
+                "Cato",
+                "Clodius",
+                "Brutus and Cassius",
+                "Antony",
+                "Lepidus (Triumvir)",
+                "Sextus Pompeuis",
+                "Octavian"
+            ],
+            "Sulla and the 70s": [
+                "Sulla’s Consulship, 88 BC",
+                "Sulla’s Eastern Campaign",
+                "Rome in Sulla’s Absence",
+                "Sulla’s Civil War, 83-81 BC",
+                "Sulla’s Dictatorship, 81-79 BC",
+                "Sulla’s Reforms",
+                "Responses to Sulla’s Reforms, 79-70 BC",
+                "Lepidus’ Revolt, 77 BC",
+                "Pompey’s Early Career",
+                "The Third Servile War, 73-71 BC",
+                "Pompey and Crassus’ Consulship 70 BC"
+            ],
+            "Cicero and the 60s": [
+                "The (First Catilinarian) Conspiracy, 66-55 BC",
+                "Cicero’s Early Career",
+                "Cicero’s Consulship Bid, 64 BC",
+                "Cicero’s Consulship, 63 BC",
+                "The Catilinarian Conspiracy, 63 BC",
+                "The lex Gabinia",
+                "The lex Manilia",
+                "Pompey’s Eastern Settlement",
+                "Caesar’s Early Career"
+            ],
+            "The 50s – A Turbulent Decade": [
+                "Formation of The First Triumvirate, c. 60 BC",
+                "Caesar’s Consulship, 59 BC",
+                "Clodius’ Early Career",
+                "Clodius’ Tribunate, 58 BC",
+                "The Breakdown of the Triumvirate",
+                "Pompey and Crassus’ Second Consulship, 55 BC",
+                "Clodius and Milo, 52 BC",
+                "Pompey’s Sole Consulship, 52 BC"
+            ],
+            "Civil War and Dictatorship": [
+                "Lead up to the Civil War, 51-50 BC",
+                "Caesar’s Civil War, 49-44 BC",
+                "Caesar’s Dictatorships",
+                "Caesar’s Reforms",
+                "Complaints Against Caesar",
+                "Caesar’s Assassination, 44 BC"
+            ],
+            "The Second Triumvirate": [
+                "Aftermath of the Assassination, 44 BC",
+                "Octavian vs. Antony, 44-43 BC",
+                "The Formation of the Second Triumvirate, 43 BC",
+                "The Liberators’ Civil War, 43-42 BC",
+                "From Philippi to Brundisium, 42-40 BC",
+                "The Treaty of Brundisium, 40 BC",
+                "The Treaty of Misenum, 39 BC",
+                "The Treaty of Tarentum, 37 BC",
+                "The Bellum Siculum, 36 BC",
+                "Antony and Octavian, 36-33 BC",
+                "Preparations for the War of Actium, 33-31 BC",
+                "The Battle of Actium, 31 BC"
             ]
         },
         "The Julio-Claudians": {
@@ -202,7 +290,19 @@
                 "Augustus and Religion",
                 "Augustus and the Imperial cult",
                 "Augustus and Tradition",
-                "Augustus and Livia"
+                "Augustus and Livia",
+                "Augustus’ Military Achievements",
+                "Augustus’ Administration of Rome",
+                "Augustus’ Administration of the Empire",
+                "Augustus and the Senate",
+                "Augustus and the Equestrians",
+                "Augustus and the Plebs",
+                "Challenges to Augustus’ Rule",
+                "Augustus and Agrippa",
+                "Augustus’ Building Programme",
+                "Augustus and Tiberius",
+                "Augustus’ Efforts to secure the Succession",
+                "The Res Gestae"
             ],
             "Tiberius": [
                 "Tiberius’ Accession",
@@ -215,7 +315,87 @@
                 "Tacitus on Tiberius",
                 "Velleius Paterculus on Tiberius",
                 "Challenges to Tiberius",
-                "Maiestas Trials"
+                "Maiestas Trials",
+                "Tiberius’ Administration of the Empire",
+                "Tiberius and the Senate",
+                "Tiberius and the Equestrians",
+                "Tiberius and the Plebs",
+                "Tiberius’ Administration of Rome",
+                "Tiberius and Religion",
+                "Tiberius and the Imperial cult"
+            ],
+            "Gaius": [
+                "Gaius’ Accession",
+                "Gaius’ Early Reign",
+                "Gaius’ Madness",
+                "Gaius and Religion",
+                "Gaius and the Imperial Cult",
+                "Gaius’ Administration of Rome",
+                "Gaius’ Administration of the Empire",
+                "Gaius and the Senate",
+                "Gaius and the Equestrians",
+                "Gaius and the Plebs",
+                "Gaius’ Assassination"
+            ],
+            "Claudius": [
+                "Claudius’ Accession",
+                "Claudius’ Freedmen",
+                "Claudius’ Civil Service",
+                "Claudius and Messalina",
+                "Claudius and Agrippina",
+                "Claudius’ Administration of the Empire",
+                "Claudius’ Administration of Rome",
+                "The Invasion of Britain",
+                "Claudius and the Senate",
+                "Claudius and the Equestrians",
+                "Claudius and the Plebs",
+                "Claudius and Britannicus",
+                "Claudius and Nero",
+                "Claudius’ Death"
+            ],
+            "Nero": [
+                "Nero’s Accession",
+                "Nero’s Early Reign",
+                "Nero and Agrippina",
+                "Nero and Octavia",
+                "Nero and Poppaea Sabina",
+                "Nero and Messalina",
+                "Nero’s Administration of Rome",
+                "Nero and Religion",
+                "Nero and the Senate",
+                "Nero and the Equestrians",
+                "Nero and the Plebs",
+                "The Great Fire of Rome",
+                "The Piso Conspiracy",
+                "Corbulo in Armenia",
+                "The Revolt of Vindex",
+                "The Death of Nero",
+                "Nero in the Sources"
+            ],
+            "Themes Across Emperors": [
+                "Accession",
+                "Presentations in the Sources",
+                "Attempts to secure Succession",
+                "Roles of Others in Emperors’ Reigns",
+                "Emperors and their Wives",
+                "Administration of Rome",
+                "Administration of the Provinces",
+                "Relations with the Senate",
+                "Relations with the Equestrians",
+                "Relations with the Plebs",
+                "Challenges to Emperors’ Reigns",
+                "Attitudes to Religion",
+                "The Imperial Cult",
+                "Depictions in Suetonius",
+                "Depictions in Tacitus"
+            ],
+            "Interpretations": [
+                "The extent to which Augustus restored the Republic",
+                "The character of Tiberius",
+                "The character of Gaius",
+                "The character of Claudius",
+                "The character of Nero",
+                "The benefits of Imperial rule for the Inhabitants of Rome"
             ]
         }
     },
