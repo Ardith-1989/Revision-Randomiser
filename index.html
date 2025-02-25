@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revision Randomiser</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- 🔹 Header Bar -->
+    <header>
+        <h1>Revision Randomiser</h1>
+        <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    </header>
+
+    <div class="container">
+        <!-- Upload Excel File -->
+        <input type="file" id="fileInput" accept=".xlsx, .xls">
+        <button onclick="loadFile()">Upload Excel</button>
+
+        <!-- Toggle Selection Checkboxes -->
+        <div class="toggle-options">
+            <label>
+                <input type="checkbox" id="functionOnly" onchange="toggleSelection('function')">
+                Only Select Instruction Cards
+            </label>
+            <label>
+                <input type="checkbox" id="contentOnly" onchange="toggleSelection('content')">
+                Only Select Content Cards
+            </label>
+        </div>
+
+        <!-- Flashcard Display -->
+        <div class="flashcard-container">
+            <div class="flashcard" id="content-card">Content</div>
+            <div class="flashcard" id="function-card">Instruction</div>
+        </div>
+
+        <button onclick="generateFlashcards()">Generate</button>
+    </div>
+
+<!-- 🔹 Sidebar -->
+<div id="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">✖</button>
+    <h2>Select Groups & Cards</h2>
+
+    <!-- Content Card Selection -->
+    <div id="groupSelection"></div>
+
+    <!-- Function Card Selection (Collapsible) -->
+    <div class="collapsible-container">
+        <div class="collapsible-header" onclick="toggleFunctionSelection()">
+            <input type="checkbox" id="selectAllFunctions" onchange="toggleAllFunctions()"> 
+            <strong>Select Instruction Cards</strong> ▼
+        </div>
+        <div id="functionSelection" class="collapsible-content"></div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
