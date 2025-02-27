@@ -405,6 +405,9 @@
         "3 min free recall",
         "Summarise in one sentence",
         "Create a visual organiser of this",
-        "Name one source for this"
+        "Name one source for this",
+        "Summarise this topic in exactly 20 words",
+        "Write a 5 minute paragraph about this topic",
+        "Write an exam question in which you could talk about this topic"
     ]
 }
