@@ -169,3 +169,34 @@ if ("serviceWorker" in navigator) {
     .then((reg) => console.log("Service Worker Registered!", reg))
     .catch((err) => console.log("Service Worker Registration Failed!", err));
 }
+
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredPrompt = event;
+
+  // Create an install button
+  let installButton = document.createElement("button");
+  installButton.textContent = "Install App";
+  installButton.style.position = "fixed";
+  installButton.style.bottom = "20px";
+  installButton.style.right = "20px";
+  installButton.style.padding = "10px";
+  installButton.style.background = "#007BFF";
+  installButton.style.color = "#fff";
+  installButton.style.border = "none";
+  installButton.style.cursor = "pointer";
+
+  installButton.addEventListener("click", () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choice) => {
+      if (choice.outcome === "accepted") {
+        console.log("User installed the app");
+      }
+      installButton.remove();
+    });
+  });
+
+  document.body.appendChild(installButton);
+});
