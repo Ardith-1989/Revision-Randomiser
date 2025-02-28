@@ -1,5 +1,5 @@
 
-// Function to load card data from JSON file with better error handling
+// Function to load card data from JSON file with nested categories support
 async function loadCardData() {
     try {
         let response = await fetch('./cards_data.json');
@@ -31,51 +31,65 @@ function toggleSidebar() {
     sidebar.classList.toggle("open");
 }
 
+// Function to create checkboxes for nested categories
+function createCategoryCheckboxes(parentElement, categories) {
+    Object.entries(categories).forEach(([category, items]) => {
+        let container = document.createElement("div");
+        container.classList.add("category-container");
+
+        let categoryTitle = document.createElement("div");
+        categoryTitle.classList.add("category-title");
+        categoryTitle.textContent = category;
+
+        let categoryCheckbox = document.createElement("input");
+        categoryCheckbox.type = "checkbox";
+        categoryCheckbox.classList.add("category-checkbox");
+        categoryCheckbox.dataset.category = category;
+        categoryCheckbox.onclick = (event) => {
+            event.stopPropagation(); // Prevent dropdown expansion when clicking checkbox
+        };
+        categoryCheckbox.onchange = () => {
+            let checkboxes = container.querySelectorAll(".content-checkbox");
+            checkboxes.forEach(cb => cb.checked = categoryCheckbox.checked);
+        };
+
+        let contentDiv = document.createElement("div");
+        contentDiv.classList.add("category-content");
+
+        categoryTitle.prepend(categoryCheckbox);
+        categoryTitle.onclick = (event) => {
+            if (!event.target.classList.contains("category-checkbox")) {
+                contentDiv.style.display = contentDiv.style.display === "block" ? "none" : "block";
+            }
+        };
+
+        if (Array.isArray(items)) {
+            items.forEach(item => {
+                let label = document.createElement("label");
+                let checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.classList.add("content-checkbox");
+                checkbox.value = item;
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(" " + item));
+                contentDiv.appendChild(label);
+            });
+        } else {
+            createCategoryCheckboxes(contentDiv, items); // Recursive call for deeper nesting
+        }
+
+        container.appendChild(categoryTitle);
+        container.appendChild(contentDiv);
+        parentElement.appendChild(container);
+    });
+}
+
 // Function to populate content group selection in the sidebar
 function updateGroupSelection() {
     const groupSelection = document.getElementById("groupSelection");
     groupSelection.innerHTML = "";
 
-    for (let group in contentGroups) {
-        let container = document.createElement("div");
-        container.classList.add("group-container");
-
-        let title = document.createElement("div");
-        title.classList.add("group-title");
-        title.textContent = group;
-        title.onclick = () => {
-            let contentDiv = container.querySelector(".group-content");
-            contentDiv.style.display = contentDiv.style.display === "block" ? "none" : "block";
-        };
-
-        let groupCheckbox = document.createElement("input");
-        groupCheckbox.type = "checkbox";
-        groupCheckbox.classList.add("group-checkbox");
-        groupCheckbox.dataset.group = group;
-        groupCheckbox.onchange = () => {
-            let checkboxes = container.querySelectorAll(".content-checkbox");
-            checkboxes.forEach(cb => cb.checked = groupCheckbox.checked);
-        };
-
-        let contentDiv = document.createElement("div");
-        contentDiv.classList.add("group-content");
-
-        contentGroups[group].forEach(content => {
-            let label = document.createElement("label");
-            let checkbox = document.createElement("input");
-            checkbox.type = "checkbox";
-            checkbox.classList.add("content-checkbox");
-            checkbox.value = content;
-            label.appendChild(checkbox);
-            label.appendChild(document.createTextNode(" " + content));
-            contentDiv.appendChild(label);
-        });
-
-        title.prepend(groupCheckbox);
-        container.appendChild(title);
-        container.appendChild(contentDiv);
-        groupSelection.appendChild(container);
-    }
+    createCategoryCheckboxes(groupSelection, contentGroups);
 }
 
 // Function to toggle function selection visibility
