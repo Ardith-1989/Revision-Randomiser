@@ -11,7 +11,7 @@ async function loadCardData() {
         console.log("JSON Data Loaded:", data); // Debugging log
 
         contentGroups = data.contentGroups;
-        functionGroup = data.functionGroups;
+        functionGroups = data.functionGroups;
 
         updateGroupSelection();
         updateFunctionSelection();
@@ -23,7 +23,7 @@ async function loadCardData() {
 
 // Initialize flashcard groups
 let contentGroups = {};
-let functionGroup = [];
+let functionGroups = [];
 
 // Function to show/hide sidebar
 function toggleSidebar() {
