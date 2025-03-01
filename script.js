@@ -11,7 +11,7 @@ async function loadCardData() {
         console.log("JSON Data Loaded:", data); // Debugging log
 
         contentGroups = data.contentGroups;
-        functionGroup = data.functionGroup;
+        functionGroup = data.functionGroups;
 
         updateGroupSelection();
         updateFunctionSelection();
