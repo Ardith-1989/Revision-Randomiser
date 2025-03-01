@@ -399,15 +399,24 @@
             ]
         }
     },
-    "functionGroup": [
-        "Summarise in 5 bullets",
-        "Summarise in 3 bullets",
-        "3 min free recall",
-        "Summarise in one sentence",
-        "Create a visual organiser of this",
-        "Name one source for this",
-        "Summarise this topic in exactly 20 words",
-        "Write a 5 minute paragraph about this topic",
-        "Write an exam question in which you could talk about this topic"
-    ]
+{
+    "functionGroups": {
+        "Summarisation": [
+            "Summarise in 5 bullets",
+            "Summarise in 3 bullets",
+            "Summarise in one sentence",
+            "Summarise this topic in exactly 20 words"
+        ],
+        "Recall & Writing": [
+            "3 min free recall",
+            "Write a 5-minute paragraph about this topic",
+            "Write an exam question in which you could talk about this topic"
+        ],
+        "Organisers & Sources": [
+            "Create a visual organiser of this",
+            "Name one source for this"
+        ]
+    }
+}
+
 }

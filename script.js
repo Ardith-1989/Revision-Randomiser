@@ -200,45 +200,59 @@ window.addEventListener("beforeinstallprompt", (event) => {
 
   document.body.appendChild(installButton);
 });
+// 🔹 Load Nested Function Categories
+function loadFunctionCategories() {
+    fetch('cards_data.json')
+        .then(response => response.json())
+        .then(data => {
+            const functionSelectionDiv = document.getElementById('functionSelection');
+            functionSelectionDiv.innerHTML = ''; // Clear previous content
 
-// 🔹 Sidebar Toggle
-function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
+            Object.entries(data.functionGroups).forEach(([category, functions]) => {
+                // Create Category Header
+                const categoryContainer = document.createElement('div');
+                categoryContainer.classList.add('function-container');
+
+                const categoryHeader = document.createElement('div');
+                categoryHeader.classList.add('function-title');
+                categoryHeader.innerHTML = `<input type="checkbox" class="function-checkbox" onchange="toggleCategoryFunctions(this)"> ${category} ▼`;
+
+                // Create Function List (Initially Hidden)
+                const functionList = document.createElement('div');
+                functionList.classList.add('function-content');
+                functionList.style.display = 'none';
+
+                functions.forEach(func => {
+                    const label = document.createElement('label');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.classList.add('function-checkbox');
+                    checkbox.value = func;
+                    label.appendChild(checkbox);
+                    label.appendChild(document.createTextNode(` ${func}`));
+                    functionList.appendChild(label);
+                });
+
+                // Add Toggle Feature to Category Header
+                categoryHeader.addEventListener('click', () => {
+                    functionList.style.display = functionList.style.display === 'none' ? 'block' : 'none';
+                });
+
+                // Append to Sidebar
+                categoryContainer.appendChild(categoryHeader);
+                categoryContainer.appendChild(functionList);
+                functionSelectionDiv.appendChild(categoryContainer);
+            });
+        })
+        .catch(error => console.error('Error loading function categories:', error));
 }
 
-// 🔹 Select All Functionality
-function toggleAllContent() {
-    document.querySelectorAll('#groupSelection input[type="checkbox"]').forEach(cb => {
-        cb.checked = document.getElementById('selectAllContent').checked;
-    });
+// 🔹 Toggle all functions in a category
+function toggleCategoryFunctions(checkbox) {
+    const functionContainer = checkbox.parentElement.nextElementSibling;
+    const checkboxes = functionContainer.querySelectorAll('.function-checkbox');
+    checkboxes.forEach(cb => cb.checked = checkbox.checked);
 }
 
-function toggleAllFunctions() {
-    document.querySelectorAll('#functionSelection input[type="checkbox"]').forEach(cb => {
-        cb.checked = document.getElementById('selectAllFunctions').checked;
-    });
-}
-
-// 🔹 Flashcard Hover Preview
-document.querySelectorAll('.flashcard').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'scale(1.05)';
-        card.style.background = '#e0f7fa';
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'scale(1)';
-        card.style.background = 'white';
-    });
-});
-
-// 🔹 Dark Mode Toggle
-document.getElementById('darkModeToggle').addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-});
-
-// Load Dark Mode Preference
-if (localStorage.getItem('darkMode') === 'enabled') {
-    document.body.classList.add('dark-mode');
-}
+// Load function categories on page load
+document.addEventListener('DOMContentLoaded', loadFunctionCategories);
