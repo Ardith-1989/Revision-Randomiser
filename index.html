@@ -17,10 +17,11 @@
 <body>
 
     <!-- 🔹 Header Bar -->
-    <header>
-        <h1>Revision Randomiser</h1>
-        <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
-    </header>
+	<header>
+		<h1>Revision Randomiser</h1>
+		<button id="darkModeToggle">🌙</button>
+		<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+	</header>
 
     <div class="container">
         <!-- Upload Excel File -->
@@ -39,27 +40,36 @@
             </label>
         </div>
 
-        <!-- Flashcard Display -->
-        <div class="flashcard-container">
-            <div class="flashcard" id="content-card">Content</div>
-            <div class="flashcard" id="function-card">Instruction</div>
-        </div>
+		<!-- Flashcards Display -->
+		<div class="flashcard-container">
+			<div class="flashcard" id="content-card">Content</div>
+			<div class="flashcard" id="function-card">Instruction</div>
+		</div>
 
-        <button onclick="generateFlashcards()">Generate</button>
+		<button onclick="generateFlashcards()">Generate</button>
+
     </div>
 
-<!-- 🔹 Sidebar -->
+<!-- Sidebar -->
 <div id="sidebar">
     <button class="close-btn" onclick="toggleSidebar()">✖</button>
     <h2>Select Groups & Cards</h2>
 
-    <!-- Content Card Selection -->
+    <!-- Select All Feature -->
+    <label class="select-all">
+        <input type="checkbox" id="selectAllContent" onchange="toggleAllContent()"> Select All Content Cards
+    </label>
+
+    <label class="select-all">
+        <input type="checkbox" id="selectAllFunctions" onchange="toggleAllFunctions()"> Select All Function Cards
+    </label>
+
+    <!-- Content Selection -->
     <div id="groupSelection"></div>
 
-    <!-- Function Card Selection (Collapsible) -->
+    <!-- Function Selection -->
     <div class="collapsible-container">
         <div class="collapsible-header" onclick="toggleFunctionSelection()">
-            <input type="checkbox" id="selectAllFunctions" onchange="toggleAllFunctions()"> 
             <strong>Select Instruction Cards</strong> ▼
         </div>
         <div id="functionSelection" class="collapsible-content"></div>

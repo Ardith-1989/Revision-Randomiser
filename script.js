@@ -200,3 +200,45 @@ window.addEventListener("beforeinstallprompt", (event) => {
 
   document.body.appendChild(installButton);
 });
+
+// 🔹 Sidebar Toggle
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+}
+
+// 🔹 Select All Functionality
+function toggleAllContent() {
+    document.querySelectorAll('#groupSelection input[type="checkbox"]').forEach(cb => {
+        cb.checked = document.getElementById('selectAllContent').checked;
+    });
+}
+
+function toggleAllFunctions() {
+    document.querySelectorAll('#functionSelection input[type="checkbox"]').forEach(cb => {
+        cb.checked = document.getElementById('selectAllFunctions').checked;
+    });
+}
+
+// 🔹 Flashcard Hover Preview
+document.querySelectorAll('.flashcard').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'scale(1.05)';
+        card.style.background = '#e0f7fa';
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'scale(1)';
+        card.style.background = 'white';
+    });
+});
+
+// 🔹 Dark Mode Toggle
+document.getElementById('darkModeToggle').addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+});
+
+// Load Dark Mode Preference
+if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+}
