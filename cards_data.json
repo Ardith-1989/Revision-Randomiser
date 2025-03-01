@@ -399,7 +399,7 @@
             ]
         }
     },
-{
+
     "functionGroups": {
         "Summarisation": [
             "Summarise in 5 bullets",
@@ -417,6 +417,4 @@
             "Name one source for this"
         ]
     }
-}
-
 }
