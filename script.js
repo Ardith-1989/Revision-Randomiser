@@ -9,9 +9,9 @@ async function loadCardData() {
         let data = await response.json();
 
         console.log("JSON Data Loaded Successfully:", data); // Debugging log
-
-        contentGroups = data.contentGroups;
-        functionGroups = data.functionGroups;
+        
+        contentGroups = { ...data.contentGroups };
+        functionGroups = { ...data.functionGroups };
 
         updateGroupSelection();
         updateFunctionSelection();
@@ -22,6 +22,45 @@ async function loadCardData() {
         if (Object.keys(contentGroups).length === 0) {
             alert("Failed to load flashcard data. Please ensure the JSON file is accessible.");
         }
+    }
+        // Handle File Upload
+    function handleFileUpload() {
+        const fileInput = document.getElementById("fileInput");
+        if (fileInput.files.length === 0) {
+            alert("Please select a file to upload.");
+            return;
+        }
+    
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = function (event) {
+            try {
+                let uploadedData = JSON.parse(event.target.result);
+    
+                // Merge uploaded content with existing contentGroups
+                if (uploadedData.contentGroups) {
+                    Object.keys(uploadedData.contentGroups).forEach(group => {
+                        contentGroups[`(Uploaded) ${group}`] = uploadedData.contentGroups[group];
+                    });
+                }
+    
+                if (uploadedData.functionGroups) {
+                    Object.keys(uploadedData.functionGroups).forEach(group => {
+                        functionGroups[`(Uploaded) ${group}`] = uploadedData.functionGroups[group];
+                    });
+                }
+    
+                // Refresh UI
+                updateGroupSelection();
+                updateFunctionSelection();
+                alert("Flashcard data uploaded successfully!");
+            } catch (error) {
+                alert("Invalid JSON file format. Please check the file and try again.");
+            }
+        };
+    
+        reader.readAsText(file);
     }
 }
 
@@ -89,13 +128,39 @@ function createCategoryCheckboxes(parentElement, categories) {
     });
 }
 
-// Function to populate content group selection in the sidebar
 function updateGroupSelection() {
     const groupSelection = document.getElementById("groupSelection");
     groupSelection.innerHTML = "";
 
-    createCategoryCheckboxes(groupSelection, contentGroups);
+    // Preloaded Content Section
+    let preloadedContainer = document.createElement("div");
+    preloadedContainer.classList.add("category-container");
+    preloadedContainer.innerHTML = "<strong>Preloaded Content</strong>";
+    createCategoryCheckboxes(preloadedContainer, contentGroups);
+    groupSelection.appendChild(preloadedContainer);
+
+    // Uploaded Content Section (Collapsible)
+    if (Object.keys(contentGroups).some(key => key.startsWith("(Uploaded)"))) {
+        let uploadedContainer = document.createElement("div");
+        uploadedContainer.classList.add("category-container");
+        
+        let uploadedHeader = document.createElement("div");
+        uploadedHeader.classList.add("category-title");
+        uploadedHeader.textContent = "Uploaded Content";
+        uploadedHeader.onclick = () => {
+            uploadedContent.style.display = uploadedContent.style.display === "block" ? "none" : "block";
+        };
+
+        let uploadedContent = document.createElement("div");
+        uploadedContent.classList.add("category-content");
+        createCategoryCheckboxes(uploadedContent, Object.fromEntries(Object.entries(contentGroups).filter(([key]) => key.startsWith("(Uploaded)"))));
+
+        uploadedContainer.appendChild(uploadedHeader);
+        uploadedContainer.appendChild(uploadedContent);
+        groupSelection.appendChild(uploadedContainer);
+    }
 }
+
 
 // Function to toggle function selection visibility
 function toggleFunctionSelection(event) {
@@ -359,16 +424,98 @@ function randomiseSingleCard(type) {
     }
 }
 
+// Handle Excel File Upload
+async function handleExcelUpload() {
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput.files.length === 0) {
+        alert("Please select an Excel file.");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async function (event) {
+        try {
+            const data = new Uint8Array(event.target.result);
+            const workbook = XLSX.read(data, { type: "array" });
+            let parsedData = parseExcelToJSON(workbook);
+
+            // Merge uploaded data into the global storage
+            Object.keys(parsedData.contentGroups).forEach(group => {
+                contentGroups[`(Uploaded) ${group}`] = parsedData.contentGroups[group];
+            });
+
+            Object.keys(parsedData.functionGroups).forEach(group => {
+                functionGroups[`(Uploaded) ${group}`] = parsedData.functionGroups[group];
+            });
+
+            // Ensure UI updates
+            await loadCardData(); // Reload to integrate new data
+            updateGroupSelection();
+            updateFunctionSelection();
+
+            alert("Flashcard data uploaded successfully!");
+        } catch (error) {
+            console.error("Error processing Excel file:", error);
+            alert("Invalid Excel file format. Please check the structure.");
+        }
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+
+// Convert Excel File Data into JSON Format
+function parseExcelToJSON(workbook) {
+    let sheet = workbook.Sheets[workbook.SheetNames[0]];
+    let jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+    let contentGroups = {};
+    let functionGroups = {};
+    let currentCategory = "";
+    let isFunctionGroup = false;
+
+    jsonData.forEach((row) => {
+        if (row.length === 0) return;
+
+        if (row[0] === "Functions") {
+            isFunctionGroup = true;
+            return;
+        }
+
+        if (!isFunctionGroup) {
+            if (row[0] && !row[1]) {
+                currentCategory = `(Uploaded) ${row[0]}`; // Ensure "(Uploaded)" is prefixed
+                contentGroups[currentCategory] = [];
+            } else if (currentCategory && row[1]) {
+                contentGroups[currentCategory].push(row[1]);
+            }
+        } else {
+            if (row[0] && !row[1]) {
+                currentCategory = `(Uploaded) ${row[0]}`;
+                functionGroups[currentCategory] = [];
+            } else if (currentCategory && row[1]) {
+                functionGroups[currentCategory].push(row[1]);
+            }
+        }
+    });
+
+    return { contentGroups, functionGroups };
+}
+
+
 // Function to create and download an Excel template
 function downloadExcelTemplate() {
-    // Define the template structure
+    // Define the correct template structure
     const templateData = [
-        ["Content Groups", ""], // Header
+        ["Content Group", "Topic"], // Headers
         ["Greek History", "The Battle of Marathon"],
         ["", "The Battle of Salamis"],
         ["Roman History", "Caesar’s Assassination"],
         ["", "Augustus’ Reforms"],
         ["Functions", ""], // Separator
+        ["Function Group", "Function Instruction"], // Function Headers
         ["Summarisation", "Summarise in 3 bullet points"],
         ["Recall", "Write a 5-minute paragraph"]
     ];
@@ -376,7 +523,7 @@ function downloadExcelTemplate() {
     // Create a new worksheet
     const worksheet = XLSX.utils.aoa_to_sheet(templateData);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Template");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Flashcard Template");
 
     // Generate Excel file and trigger download
     XLSX.writeFile(workbook, "Flashcard_Template.xlsx");
