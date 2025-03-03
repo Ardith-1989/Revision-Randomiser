@@ -152,17 +152,18 @@ function generateFlashcards() {
         return;
     }
 
-    if (functionOnly) {
-        document.getElementById("function-card").innerText = selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)];
-        document.getElementById("content-card").innerText = "Content";
-    } else if (contentOnly) {
-        document.getElementById("content-card").innerText = selectedContent[Math.floor(Math.random() * selectedContent.length)];
-        document.getElementById("function-card").innerText = "Function";
-    } else {
-        document.getElementById("content-card").innerText = selectedContent[Math.floor(Math.random() * selectedContent.length)];
-        document.getElementById("function-card").innerText = selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)];
-    }
+    let contentText = contentOnly ? "Content" : selectedContent.length > 0 
+        ? selectedContent[Math.floor(Math.random() * selectedContent.length)] 
+        : "No Content Selected";
+
+    let functionText = functionOnly ? "Function" : selectedFunctions.length > 0 
+        ? selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)] 
+        : "No Function Selected";  // Ensure fallback value
+
+    document.getElementById("content-card").innerText = contentText;
+    document.getElementById("function-card").innerText = functionText;
 }
+
 
 // Ensure JSON data loads properly before running other scripts
 document.addEventListener("DOMContentLoaded", async () => {
