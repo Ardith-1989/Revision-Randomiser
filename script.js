@@ -152,17 +152,27 @@ function generateFlashcards() {
         return;
     }
 
-    let contentText = contentOnly ? "Content" : selectedContent.length > 0 
-        ? selectedContent[Math.floor(Math.random() * selectedContent.length)] 
-        : "No Content Selected";
+    let contentText = contentOnly 
+        ? "Content" 
+        : selectedContent.length > 0 
+            ? selectedContent[Math.floor(Math.random() * selectedContent.length)] 
+            : "No Content Selected";
 
-    let functionText = functionOnly ? "Function" : selectedFunctions.length > 0 
-        ? selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)] 
-        : "No Function Selected";  // Ensure fallback value
+    let functionText = functionOnly 
+        ? "Function" 
+        : selectedFunctions.length > 0 
+            ? selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)] 
+            : "No Function Selected";
+
+    // **Explicit Fix: Ensure functionText is never "on"**
+    if (functionText === "on" || functionText === undefined || functionText === null) {
+        functionText = "Invalid Selection";
+    }
 
     document.getElementById("content-card").innerText = contentText;
     document.getElementById("function-card").innerText = functionText;
 }
+
 
 
 // Ensure JSON data loads properly before running other scripts
