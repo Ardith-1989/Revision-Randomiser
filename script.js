@@ -112,9 +112,20 @@ function updateFunctionSelection() {
         let categoryContainer = document.createElement("div");
         categoryContainer.classList.add("function-container");
 
-        let categoryTitle = document.createElement("div");
-        categoryTitle.classList.add("function-title");
-        categoryTitle.innerHTML = `<input type="checkbox" class="function-category-checkbox" onchange="toggleCategoryFunctions(this)"> ${category} ▼`;
+        // Category checkbox
+        let categoryHeader = document.createElement("div");
+        categoryHeader.classList.add("function-title");
+
+        let categoryCheckbox = document.createElement("input");
+        categoryCheckbox.type = "checkbox";
+        categoryCheckbox.classList.add("function-category-checkbox");
+        categoryCheckbox.onchange = function() {
+            toggleCategoryFunctions(categoryCheckbox);
+            updateSelectAllCheckbox(); // Update "Select All" checkbox status
+        };
+
+        categoryHeader.appendChild(categoryCheckbox);
+        categoryHeader.appendChild(document.createTextNode(` ${category} ▼`));
 
         let functionList = document.createElement("div");
         functionList.classList.add("function-content");
@@ -127,33 +138,42 @@ function updateFunctionSelection() {
             checkbox.classList.add("function-checkbox");
             checkbox.value = func;
 
+            checkbox.onchange = updateSelectAllCheckbox; // Update "Select All" checkbox status
+
             label.appendChild(checkbox);
             label.appendChild(document.createTextNode(` ${func}`));
             functionList.appendChild(label);
         });
 
-        categoryTitle.addEventListener("click", () => {
+        categoryHeader.addEventListener("click", () => {
             functionList.style.display = functionList.style.display === "none" ? "block" : "none";
         });
 
-        categoryContainer.appendChild(categoryTitle);
+        categoryContainer.appendChild(categoryHeader);
         categoryContainer.appendChild(functionList);
         functionSelection.appendChild(categoryContainer);
     });
 }
 
-
 // Function to select/deselect all function cards
 function toggleAllFunctionCards() {
     let isChecked = document.getElementById("selectAllFunctions").checked;
-    document.querySelectorAll(".function-checkbox").forEach(cb => cb.checked = isChecked);
+    document.querySelectorAll(".function-category-checkbox, .function-checkbox").forEach(cb => cb.checked = isChecked);
+}
+
+// Update Select All Checkboxes
+function updateSelectAllCheckbox() {
+    let allFunctionCheckboxes = document.querySelectorAll(".function-checkbox");
+    let allChecked = Array.from(allFunctionCheckboxes).every(cb => cb.checked);
+    document.getElementById("selectAllFunctions").checked = allChecked;
 }
 
 // Category wise Selection
-function toggleCategoryFunctions(checkbox) {
-    const functionContainer = checkbox.parentElement.nextElementSibling;
+function toggleCategoryFunctions(categoryCheckbox) {
+    const functionContainer = categoryCheckbox.parentElement.nextElementSibling;
     const checkboxes = functionContainer.querySelectorAll('.function-checkbox');
-    checkboxes.forEach(cb => cb.checked = checkbox.checked);
+    checkboxes.forEach(cb => cb.checked = categoryCheckbox.checked);
+    updateSelectAllCheckbox(); // Ensure "Select All" checkbox reflects the change
 }
 
 // Function to generate random flashcards
