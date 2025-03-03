@@ -511,7 +511,6 @@ function parseExcelToJSON(workbook) {
 function downloadExcelTemplate() {
     // Define the template structure
     const templateData = [
-        ["Content Groups", ""], // Header
         ["Greek History", "The Battle of Marathon"],
         ["", "The Battle of Salamis"],
         ["Roman History", "Caesar’s Assassination"],
