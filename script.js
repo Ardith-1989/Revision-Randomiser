@@ -509,13 +509,15 @@ function parseExcelToJSON(workbook) {
 
 // Function to create and download an Excel template
 function downloadExcelTemplate() {
-    // Define the template structure
+    // Define the correct template structure
     const templateData = [
+        ["Content Group", "Topic"], // Headers
         ["Greek History", "The Battle of Marathon"],
         ["", "The Battle of Salamis"],
         ["Roman History", "Caesar’s Assassination"],
         ["", "Augustus’ Reforms"],
         ["Functions", ""], // Separator
+        ["Function Group", "Function Instruction"], // Function Headers
         ["Summarisation", "Summarise in 3 bullet points"],
         ["Recall", "Write a 5-minute paragraph"]
     ];
@@ -523,7 +525,7 @@ function downloadExcelTemplate() {
     // Create a new worksheet
     const worksheet = XLSX.utils.aoa_to_sheet(templateData);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Template");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Flashcard Template");
 
     // Generate Excel file and trigger download
     XLSX.writeFile(workbook, "Flashcard_Template.xlsx");
