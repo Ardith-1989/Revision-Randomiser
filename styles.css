@@ -219,3 +219,34 @@ header h1 {
         width: 100%;
     }
 }
+
+/* 🔹 Function Category Styling */
+.function-container {
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    padding: 5px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.function-title {
+    font-weight: bold;
+    padding: 8px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.function-title:hover {
+    background: #d0d0d0;
+}
+
+.function-content {
+    display: none;
+    padding-left: 15px;
+}
+
+/* Checkbox Alignment */
+.function-checkbox {
+    margin-right: 5px;
+}

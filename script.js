@@ -2,28 +2,33 @@
 // Function to load card data from JSON file with nested categories support
 async function loadCardData() {
     try {
-        let response = await fetch('./cards_data.json');
+        let response = await fetch('./cards_data.json', { cache: "no-store" }); // Prevent caching issues
         if (!response.ok) {
             throw new Error('Failed to fetch JSON file: ' + response.statusText);
         }
         let data = await response.json();
 
-        console.log("JSON Data Loaded:", data); // Debugging log
+        console.log("JSON Data Loaded Successfully:", data); // Debugging log
 
         contentGroups = data.contentGroups;
-        functionGroup = data.functionGroup;
+        functionGroups = data.functionGroups;
 
         updateGroupSelection();
         updateFunctionSelection();
+
     } catch (error) {
         console.error("Error loading JSON data:", error);
-        alert("Failed to load flashcard data. Please ensure the JSON file is accessible.");
+        // Only show alert if contentGroups is still empty, meaning data hasn't loaded
+        if (Object.keys(contentGroups).length === 0) {
+            alert("Failed to load flashcard data. Please ensure the JSON file is accessible.");
+        }
     }
 }
 
+
 // Initialize flashcard groups
 let contentGroups = {};
-let functionGroup = [];
+let functionGroups = [];
 
 // Function to show/hide sidebar
 function toggleSidebar() {
@@ -124,15 +129,13 @@ function toggleAllFunctions() {
 
 // Function to generate random flashcards
 function generateFlashcards() {
-    let selectedContent = [];
-    document.querySelectorAll(".content-checkbox:checked").forEach(cb => {
-        selectedContent.push(cb.value);
-    });
+    let selectedContent = Array.from(document.querySelectorAll(".content-checkbox:checked"))
+        .map(cb => cb.value)
+        .filter(value => value.trim() !== "" && value !== "on"); // Filter out invalid values
 
-    let selectedFunctions = [];
-    document.querySelectorAll(".function-checkbox:checked").forEach(cb => {
-        selectedFunctions.push(cb.value);
-    });
+    let selectedFunctions = Array.from(document.querySelectorAll(".function-checkbox:checked"))
+        .map(cb => cb.value)
+        .filter(value => value.trim() !== "" && value !== "on"); // Ensure only valid function names are selected
 
     let functionOnly = document.getElementById("functionOnly").checked;
     let contentOnly = document.getElementById("contentOnly").checked;
@@ -147,16 +150,20 @@ function generateFlashcards() {
         return;
     }
 
-    if (functionOnly) {
-        document.getElementById("function-card").innerText = selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)];
-        document.getElementById("content-card").innerText = "Content";
-    } else if (contentOnly) {
-        document.getElementById("content-card").innerText = selectedContent[Math.floor(Math.random() * selectedContent.length)];
-        document.getElementById("function-card").innerText = "Function";
-    } else {
-        document.getElementById("content-card").innerText = selectedContent[Math.floor(Math.random() * selectedContent.length)];
-        document.getElementById("function-card").innerText = selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)];
-    }
+    let contentText = contentOnly 
+        ? "Content" 
+        : selectedContent.length > 0 
+            ? selectedContent[Math.floor(Math.random() * selectedContent.length)] 
+            : "No Content Selected";
+
+    let functionText = functionOnly 
+        ? "Function" 
+        : selectedFunctions.length > 0 
+            ? selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)] 
+            : "No Function Selected";
+
+    document.getElementById("content-card").innerText = contentText;
+    document.getElementById("function-card").innerText = functionText;
 }
 
 // Ensure JSON data loads properly before running other scripts
@@ -200,3 +207,59 @@ window.addEventListener("beforeinstallprompt", (event) => {
 
   document.body.appendChild(installButton);
 });
+// 🔹 Load Nested Function Categories
+function loadFunctionCategories() {
+    fetch('cards_data.json')
+        .then(response => response.json())
+        .then(data => {
+            const functionSelectionDiv = document.getElementById('functionSelection');
+            functionSelectionDiv.innerHTML = ''; // Clear previous content
+
+            Object.entries(data.functionGroups).forEach(([category, functions]) => {
+                // Create Category Header
+                const categoryContainer = document.createElement('div');
+                categoryContainer.classList.add('function-container');
+
+                const categoryHeader = document.createElement('div');
+                categoryHeader.classList.add('function-title');
+                categoryHeader.innerHTML = `<input type="checkbox" class="function-checkbox" onchange="toggleCategoryFunctions(this)"> ${category} ▼`;
+
+                // Create Function List (Initially Hidden)
+                const functionList = document.createElement('div');
+                functionList.classList.add('function-content');
+                functionList.style.display = 'none';
+
+                functions.forEach(func => {
+                    const label = document.createElement('label');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.classList.add('function-checkbox');
+                    checkbox.value = func;
+                    label.appendChild(checkbox);
+                    label.appendChild(document.createTextNode(` ${func}`));
+                    functionList.appendChild(label);
+                });
+
+                // Add Toggle Feature to Category Header
+                categoryHeader.addEventListener('click', () => {
+                    functionList.style.display = functionList.style.display === 'none' ? 'block' : 'none';
+                });
+
+                // Append to Sidebar
+                categoryContainer.appendChild(categoryHeader);
+                categoryContainer.appendChild(functionList);
+                functionSelectionDiv.appendChild(categoryContainer);
+            });
+        })
+        .catch(error => console.error('Error loading function categories:', error));
+}
+
+// 🔹 Toggle all functions in a category
+function toggleCategoryFunctions(checkbox) {
+    const functionContainer = checkbox.parentElement.nextElementSibling;
+    const checkboxes = functionContainer.querySelectorAll('.function-checkbox');
+    checkboxes.forEach(cb => cb.checked = checkbox.checked);
+}
+
+// Load function categories on page load
+document.addEventListener('DOMContentLoaded', loadFunctionCategories);

@@ -45,7 +45,7 @@
             <div class="flashcard" id="function-card">Instruction</div>
         </div>
 
-        <button onclick="generateFlashcards()">Generate</button>
+        <button onclick="generateFlashcards()">Randomise</button>
     </div>
 
 <!-- 🔹 Sidebar -->
@@ -56,14 +56,16 @@
     <!-- Content Card Selection -->
     <div id="groupSelection"></div>
 
-    <!-- Function Card Selection (Collapsible) -->
-    <div class="collapsible-container">
-        <div class="collapsible-header" onclick="toggleFunctionSelection()">
-            <input type="checkbox" id="selectAllFunctions" onchange="toggleAllFunctions()"> 
-            <strong>Select Instruction Cards</strong> ▼
-        </div>
-        <div id="functionSelection" class="collapsible-content"></div>
-    </div>
+	<!-- Function Card Selection (Collapsible) -->
+	<div class="collapsible-container">
+		<div class="collapsible-header" onclick="toggleFunctionSelection()">
+			<strong>Select Function Categories</strong> ▼
+		</div>
+		<div id="functionSelection" class="collapsible-content">
+			<!-- Dynamically loaded function categories will go here -->
+		</div>
+	</div>
+
 </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
