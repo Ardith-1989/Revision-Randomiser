@@ -129,15 +129,13 @@ function toggleAllFunctions() {
 
 // Function to generate random flashcards
 function generateFlashcards() {
-    let selectedContent = [];
-    document.querySelectorAll(".content-checkbox:checked").forEach(cb => {
-        selectedContent.push(cb.value);
-    });
+    let selectedContent = Array.from(document.querySelectorAll(".content-checkbox:checked"))
+        .map(cb => cb.value)
+        .filter(value => value.trim() !== "" && value !== "on"); // Filter out invalid values
 
-    let selectedFunctions = [];
-    document.querySelectorAll(".function-checkbox:checked").forEach(cb => {
-        selectedFunctions.push(cb.value);
-    });
+    let selectedFunctions = Array.from(document.querySelectorAll(".function-checkbox:checked"))
+        .map(cb => cb.value)
+        .filter(value => value.trim() !== "" && value !== "on"); // Ensure only valid function names are selected
 
     let functionOnly = document.getElementById("functionOnly").checked;
     let contentOnly = document.getElementById("contentOnly").checked;
@@ -164,16 +162,9 @@ function generateFlashcards() {
             ? selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)] 
             : "No Function Selected";
 
-    // **Explicit Fix: Ensure functionText is never "on"**
-    if (functionText === "on" || functionText === undefined || functionText === null) {
-        functionText = "Invalid Selection";
-    }
-
     document.getElementById("content-card").innerText = contentText;
     document.getElementById("function-card").innerText = functionText;
 }
-
-
 
 // Ensure JSON data loads properly before running other scripts
 document.addEventListener("DOMContentLoaded", async () => {
