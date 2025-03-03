@@ -58,14 +58,17 @@
 
 	<!-- Function Card Selection (Collapsible) -->
 	<div class="collapsible-container">
-		<div class="collapsible-header" onclick="toggleFunctionSelection()">
-			<strong>Select Function Categories</strong> ▼
-		</div>
-		<div id="functionSelection" class="collapsible-content">
-			<!-- Dynamically loaded function categories will go here -->
-		</div>
+	    <div class="collapsible-header" onclick="toggleFunctionSelection()">
+	        <strong>Select Function Categories</strong> ▼
+	    </div>
+	    <div id="functionSelection" class="collapsible-content">
+	        <label>
+	            <input type="checkbox" id="selectAllFunctions" onchange="toggleAllFunctionCards()">
+	            Select All Function Cards
+	        </label>
+	        <!-- Dynamically loaded function categories will go here -->
+	    </div>
 	</div>
-
 </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
