@@ -425,7 +425,7 @@ function randomiseSingleCard(type) {
 }
 
 // Handle Excel File Upload
-function handleExcelUpload() {
+async function handleExcelUpload() {
     const fileInput = document.getElementById("fileInput");
     if (fileInput.files.length === 0) {
         alert("Please select an Excel file.");
@@ -435,14 +435,13 @@ function handleExcelUpload() {
     const file = fileInput.files[0];
     const reader = new FileReader();
 
-    reader.onload = function (event) {
-        const data = new Uint8Array(event.target.result);
-        const workbook = XLSX.read(data, { type: "array" });
-
+    reader.onload = async function (event) {
         try {
+            const data = new Uint8Array(event.target.result);
+            const workbook = XLSX.read(data, { type: "array" });
             let parsedData = parseExcelToJSON(workbook);
-            
-            // Merge uploaded data into the current structure
+
+            // Merge uploaded data into the global storage
             Object.keys(parsedData.contentGroups).forEach(group => {
                 contentGroups[`(Uploaded) ${group}`] = parsedData.contentGroups[group];
             });
@@ -451,17 +450,21 @@ function handleExcelUpload() {
                 functionGroups[`(Uploaded) ${group}`] = parsedData.functionGroups[group];
             });
 
+            // Ensure UI updates
+            await loadCardData(); // Reload to integrate new data
             updateGroupSelection();
             updateFunctionSelection();
+
             alert("Flashcard data uploaded successfully!");
         } catch (error) {
             console.error("Error processing Excel file:", error);
-            alert("Invalid Excel file format. Please check the file structure.");
+            alert("Invalid Excel file format. Please check the structure.");
         }
     };
 
     reader.readAsArrayBuffer(file);
 }
+
 
 // Convert Excel File Data into JSON Format
 function parseExcelToJSON(workbook) {
@@ -474,7 +477,7 @@ function parseExcelToJSON(workbook) {
     let isFunctionGroup = false;
 
     jsonData.forEach((row) => {
-        if (row.length === 0) return; // Skip empty rows
+        if (row.length === 0) return;
 
         if (row[0] === "Functions") {
             isFunctionGroup = true;
@@ -482,23 +485,17 @@ function parseExcelToJSON(workbook) {
         }
 
         if (!isFunctionGroup) {
-            // Content Groups Parsing
             if (row[0] && !row[1]) {
-                // It's a new category
-                currentCategory = row[0];
+                currentCategory = `(Uploaded) ${row[0]}`; // Ensure "(Uploaded)" is prefixed
                 contentGroups[currentCategory] = [];
             } else if (currentCategory && row[1]) {
-                // It's an item within a category
                 contentGroups[currentCategory].push(row[1]);
             }
         } else {
-            // Function Groups Parsing
             if (row[0] && !row[1]) {
-                // It's a new function category
-                currentCategory = row[0];
+                currentCategory = `(Uploaded) ${row[0]}`;
                 functionGroups[currentCategory] = [];
             } else if (currentCategory && row[1]) {
-                // It's an item within a function category
                 functionGroups[currentCategory].push(row[1]);
             }
         }
@@ -506,6 +503,7 @@ function parseExcelToJSON(workbook) {
 
     return { contentGroups, functionGroups };
 }
+
 
 // Function to create and download an Excel template
 function downloadExcelTemplate() {
