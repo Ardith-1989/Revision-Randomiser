@@ -358,3 +358,26 @@ function randomiseSingleCard(type) {
         document.getElementById("function-card").innerText = functionText;
     }
 }
+
+// Function to create and download an Excel template
+function downloadExcelTemplate() {
+    // Define the template structure
+    const templateData = [
+        ["Content Groups", ""], // Header
+        ["Greek History", "The Battle of Marathon"],
+        ["", "The Battle of Salamis"],
+        ["Roman History", "Caesar’s Assassination"],
+        ["", "Augustus’ Reforms"],
+        ["Functions", ""], // Separator
+        ["Summarisation", "Summarise in 3 bullet points"],
+        ["Recall", "Write a 5-minute paragraph"]
+    ];
+
+    // Create a new worksheet
+    const worksheet = XLSX.utils.aoa_to_sheet(templateData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Template");
+
+    // Generate Excel file and trigger download
+    XLSX.writeFile(workbook, "Flashcard_Template.xlsx");
+}
