@@ -2,24 +2,29 @@
 // Function to load card data from JSON file with nested categories support
 async function loadCardData() {
     try {
-        let response = await fetch('./cards_data.json');
+        let response = await fetch('./cards_data.json', { cache: "no-store" }); // Prevent caching issues
         if (!response.ok) {
             throw new Error('Failed to fetch JSON file: ' + response.statusText);
         }
         let data = await response.json();
 
-        console.log("JSON Data Loaded:", data); // Debugging log
+        console.log("JSON Data Loaded Successfully:", data); // Debugging log
 
         contentGroups = data.contentGroups;
         functionGroups = data.functionGroups;
 
         updateGroupSelection();
         updateFunctionSelection();
+
     } catch (error) {
         console.error("Error loading JSON data:", error);
-        alert("Failed to load flashcard data. Please ensure the JSON file is accessible.");
+        // Only show alert if contentGroups is still empty, meaning data hasn't loaded
+        if (Object.keys(contentGroups).length === 0) {
+            alert("Failed to load flashcard data. Please ensure the JSON file is accessible.");
+        }
     }
 }
+
 
 // Initialize flashcard groups
 let contentGroups = {};
