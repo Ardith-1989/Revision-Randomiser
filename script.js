@@ -23,6 +23,45 @@ async function loadCardData() {
             alert("Failed to load flashcard data. Please ensure the JSON file is accessible.");
         }
     }
+        // Handle File Upload
+    function handleFileUpload() {
+        const fileInput = document.getElementById("fileInput");
+        if (fileInput.files.length === 0) {
+            alert("Please select a file to upload.");
+            return;
+        }
+    
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = function (event) {
+            try {
+                let uploadedData = JSON.parse(event.target.result);
+    
+                // Merge uploaded content with existing contentGroups
+                if (uploadedData.contentGroups) {
+                    Object.keys(uploadedData.contentGroups).forEach(group => {
+                        contentGroups[`(Uploaded) ${group}`] = uploadedData.contentGroups[group];
+                    });
+                }
+    
+                if (uploadedData.functionGroups) {
+                    Object.keys(uploadedData.functionGroups).forEach(group => {
+                        functionGroups[`(Uploaded) ${group}`] = uploadedData.functionGroups[group];
+                    });
+                }
+    
+                // Refresh UI
+                updateGroupSelection();
+                updateFunctionSelection();
+                alert("Flashcard data uploaded successfully!");
+            } catch (error) {
+                alert("Invalid JSON file format. Please check the file and try again.");
+            }
+        };
+    
+        reader.readAsText(file);
+    }
 }
 
 
@@ -89,13 +128,39 @@ function createCategoryCheckboxes(parentElement, categories) {
     });
 }
 
-// Function to populate content group selection in the sidebar
 function updateGroupSelection() {
     const groupSelection = document.getElementById("groupSelection");
     groupSelection.innerHTML = "";
 
-    createCategoryCheckboxes(groupSelection, contentGroups);
+    // Preloaded Content Section
+    let preloadedContainer = document.createElement("div");
+    preloadedContainer.classList.add("category-container");
+    preloadedContainer.innerHTML = "<strong>Preloaded Content</strong>";
+    createCategoryCheckboxes(preloadedContainer, contentGroups);
+    groupSelection.appendChild(preloadedContainer);
+
+    // Uploaded Content Section (Collapsible)
+    if (Object.keys(contentGroups).some(key => key.startsWith("(Uploaded)"))) {
+        let uploadedContainer = document.createElement("div");
+        uploadedContainer.classList.add("category-container");
+        
+        let uploadedHeader = document.createElement("div");
+        uploadedHeader.classList.add("category-title");
+        uploadedHeader.textContent = "Uploaded Content";
+        uploadedHeader.onclick = () => {
+            uploadedContent.style.display = uploadedContent.style.display === "block" ? "none" : "block";
+        };
+
+        let uploadedContent = document.createElement("div");
+        uploadedContent.classList.add("category-content");
+        createCategoryCheckboxes(uploadedContent, Object.fromEntries(Object.entries(contentGroups).filter(([key]) => key.startsWith("(Uploaded)"))));
+
+        uploadedContainer.appendChild(uploadedHeader);
+        uploadedContainer.appendChild(uploadedContent);
+        groupSelection.appendChild(uploadedContainer);
+    }
 }
+
 
 // Function to toggle function selection visibility
 function toggleFunctionSelection(event) {
