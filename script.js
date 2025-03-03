@@ -224,6 +224,15 @@ function generateFlashcards() {
 // Ensure JSON data loads properly before running other scripts
 document.addEventListener("DOMContentLoaded", async () => {
     await loadCardData();
+    
+    // Add click listeners to flashcards
+    document.getElementById("content-card").addEventListener("click", function() {
+        randomiseSingleCard("content");
+    });
+
+    document.getElementById("function-card").addEventListener("click", function() {
+        randomiseSingleCard("function");
+    });
 });
 
 if ("serviceWorker" in navigator) {
@@ -318,3 +327,34 @@ function toggleCategoryFunctions(checkbox) {
 
 // Load function categories on page load
 document.addEventListener('DOMContentLoaded', loadFunctionCategories);
+
+// Randomise Single Card
+function randomiseSingleCard(type) {
+    if (type === "content") {
+        let selectedContent = Array.from(document.querySelectorAll(".content-checkbox:checked"))
+            .map(cb => cb.value)
+            .filter(value => value.trim() !== "" && value !== "on");
+
+        if (selectedContent.length === 0) {
+            alert("Please select at least one content card.");
+            return;
+        }
+
+        let contentText = selectedContent[Math.floor(Math.random() * selectedContent.length)];
+        document.getElementById("content-card").innerText = contentText;
+    }
+
+    if (type === "function") {
+        let selectedFunctions = Array.from(document.querySelectorAll(".function-checkbox:checked"))
+            .map(cb => cb.value)
+            .filter(value => value.trim() !== "" && value !== "on");
+
+        if (selectedFunctions.length === 0) {
+            alert("Please select at least one function card.");
+            return;
+        }
+
+        let functionText = selectedFunctions[Math.floor(Math.random() * selectedFunctions.length)];
+        document.getElementById("function-card").innerText = functionText;
+    }
+}
