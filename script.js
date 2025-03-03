@@ -423,3 +423,87 @@ function randomiseSingleCard(type) {
         document.getElementById("function-card").innerText = functionText;
     }
 }
+
+// Handle Excel File Upload
+function handleExcelUpload() {
+    const fileInput = document.getElementById("fileInput");
+    if (fileInput.files.length === 0) {
+        alert("Please select an Excel file.");
+        return;
+    }
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+        const data = new Uint8Array(event.target.result);
+        const workbook = XLSX.read(data, { type: "array" });
+
+        try {
+            let parsedData = parseExcelToJSON(workbook);
+            
+            // Merge uploaded data into the current structure
+            Object.keys(parsedData.contentGroups).forEach(group => {
+                contentGroups[`(Uploaded) ${group}`] = parsedData.contentGroups[group];
+            });
+
+            Object.keys(parsedData.functionGroups).forEach(group => {
+                functionGroups[`(Uploaded) ${group}`] = parsedData.functionGroups[group];
+            });
+
+            updateGroupSelection();
+            updateFunctionSelection();
+            alert("Flashcard data uploaded successfully!");
+        } catch (error) {
+            console.error("Error processing Excel file:", error);
+            alert("Invalid Excel file format. Please check the file structure.");
+        }
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+// Convert Excel File Data into JSON Format
+function parseExcelToJSON(workbook) {
+    let sheet = workbook.Sheets[workbook.SheetNames[0]];
+    let jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+    let contentGroups = {};
+    let functionGroups = {};
+    let currentCategory = "";
+    let isFunctionGroup = false;
+
+    jsonData.forEach((row) => {
+        if (row.length === 0) return; // Skip empty rows
+
+        if (row[0] === "Functions") {
+            isFunctionGroup = true;
+            return;
+        }
+
+        if (!isFunctionGroup) {
+            // Content Groups Parsing
+            if (row[0] && !row[1]) {
+                // It's a new category
+                currentCategory = row[0];
+                contentGroups[currentCategory] = [];
+            } else if (currentCategory && row[1]) {
+                // It's an item within a category
+                contentGroups[currentCategory].push(row[1]);
+            }
+        } else {
+            // Function Groups Parsing
+            if (row[0] && !row[1]) {
+                // It's a new function category
+                currentCategory = row[0];
+                functionGroups[currentCategory] = [];
+            } else if (currentCategory && row[1]) {
+                // It's an item within a function category
+                functionGroups[currentCategory].push(row[1]);
+            }
+        }
+    });
+
+    return { contentGroups, functionGroups };
+}
+
