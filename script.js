@@ -106,25 +106,54 @@ function toggleFunctionSelection() {
 // Function to populate function selection in the sidebar
 function updateFunctionSelection() {
     const functionSelection = document.getElementById("functionSelection");
-    functionSelection.innerHTML = "";
+    functionSelection.innerHTML = '';
 
-    functionGroup.forEach(func => {
-        let label = document.createElement("label");
-        let checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.classList.add("function-checkbox");
-        checkbox.value = func;
+    Object.entries(functionGroups).forEach(([category, functions]) => {
+        let categoryContainer = document.createElement("div");
+        categoryContainer.classList.add("function-container");
 
-        label.appendChild(checkbox);
-        label.appendChild(document.createTextNode(" " + func));
-        functionSelection.appendChild(label);
+        let categoryTitle = document.createElement("div");
+        categoryTitle.classList.add("function-title");
+        categoryTitle.innerHTML = `<input type="checkbox" class="function-category-checkbox" onchange="toggleCategoryFunctions(this)"> ${category} ▼`;
+
+        let functionList = document.createElement("div");
+        functionList.classList.add("function-content");
+        functionList.style.display = 'none';
+
+        functions.forEach(func => {
+            let label = document.createElement("label");
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.classList.add("function-checkbox");
+            checkbox.value = func;
+
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(` ${func}`));
+            functionList.appendChild(label);
+        });
+
+        categoryTitle.addEventListener("click", () => {
+            functionList.style.display = functionList.style.display === "none" ? "block" : "none";
+        });
+
+        categoryContainer.appendChild(categoryTitle);
+        categoryContainer.appendChild(functionList);
+        functionSelection.appendChild(categoryContainer);
     });
 }
+
 
 // Function to select/deselect all function cards
 function toggleAllFunctionCards() {
     let isChecked = document.getElementById("selectAllFunctions").checked;
     document.querySelectorAll(".function-checkbox").forEach(cb => cb.checked = isChecked);
+}
+
+// Category wise Selection
+function toggleCategoryFunctions(checkbox) {
+    const functionContainer = checkbox.parentElement.nextElementSibling;
+    const checkboxes = functionContainer.querySelectorAll('.function-checkbox');
+    checkboxes.forEach(cb => cb.checked = checkbox.checked);
 }
 
 // Function to generate random flashcards
