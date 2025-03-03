@@ -98,7 +98,10 @@ function updateGroupSelection() {
 }
 
 // Function to toggle function selection visibility
-function toggleFunctionSelection() {
+function toggleFunctionSelection(event) {
+    // Prevent expanding/collapsing when clicking the checkbox
+    if (event.target.id === "selectAllFunctions") return;
+
     let functionDiv = document.getElementById("functionSelection");
     functionDiv.style.display = functionDiv.style.display === "block" ? "none" : "block";
 }
@@ -112,20 +115,27 @@ function updateFunctionSelection() {
         let categoryContainer = document.createElement("div");
         categoryContainer.classList.add("function-container");
 
-        // Category checkbox
         let categoryHeader = document.createElement("div");
         categoryHeader.classList.add("function-title");
 
         let categoryCheckbox = document.createElement("input");
         categoryCheckbox.type = "checkbox";
         categoryCheckbox.classList.add("function-category-checkbox");
-        categoryCheckbox.onchange = function() {
+        categoryCheckbox.onchange = function(event) {
+            event.stopPropagation(); // Prevent expansion toggle
             toggleCategoryFunctions(categoryCheckbox);
-            updateSelectAllCheckbox(); // Update "Select All" checkbox status
+            updateSelectAllCheckbox();
+        };
+
+        let categoryText = document.createElement("span");
+        categoryText.textContent = ` ${category} ▼`;
+        categoryText.onclick = function() {
+            let functionList = categoryContainer.querySelector(".function-content");
+            functionList.style.display = functionList.style.display === "block" ? "none" : "block";
         };
 
         categoryHeader.appendChild(categoryCheckbox);
-        categoryHeader.appendChild(document.createTextNode(` ${category} ▼`));
+        categoryHeader.appendChild(categoryText);
 
         let functionList = document.createElement("div");
         functionList.classList.add("function-content");
@@ -137,16 +147,11 @@ function updateFunctionSelection() {
             checkbox.type = "checkbox";
             checkbox.classList.add("function-checkbox");
             checkbox.value = func;
-
-            checkbox.onchange = updateSelectAllCheckbox; // Update "Select All" checkbox status
+            checkbox.onchange = updateSelectAllCheckbox;
 
             label.appendChild(checkbox);
             label.appendChild(document.createTextNode(` ${func}`));
             functionList.appendChild(label);
-        });
-
-        categoryHeader.addEventListener("click", () => {
-            functionList.style.display = functionList.style.display === "none" ? "block" : "none";
         });
 
         categoryContainer.appendChild(categoryHeader);
@@ -156,7 +161,8 @@ function updateFunctionSelection() {
 }
 
 // Function to select/deselect all function cards
-function toggleAllFunctionCards() {
+function toggleAllFunctionCards(event) {
+    event.stopPropagation(); // Prevents the click from triggering toggleFunctionSelection
     let isChecked = document.getElementById("selectAllFunctions").checked;
     document.querySelectorAll(".function-category-checkbox, .function-checkbox").forEach(cb => cb.checked = isChecked);
 }
