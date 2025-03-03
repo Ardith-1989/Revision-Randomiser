@@ -122,7 +122,7 @@ function updateFunctionSelection() {
 }
 
 // Function to select/deselect all function cards
-function toggleAllFunctions() {
+function toggleAllFunctionCards() {
     let isChecked = document.getElementById("selectAllFunctions").checked;
     document.querySelectorAll(".function-checkbox").forEach(cb => cb.checked = isChecked);
 }
