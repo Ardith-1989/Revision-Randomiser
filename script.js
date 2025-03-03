@@ -128,7 +128,7 @@ function updateFunctionSelection() {
         };
 
         let categoryText = document.createElement("span");
-        categoryText.textContent = ` ${category} ▼`;
+        categoryText.textContent = ` ${category} `;
         categoryText.onclick = function() {
             let functionList = categoryContainer.querySelector(".function-content");
             functionList.style.display = functionList.style.display === "block" ? "none" : "block";
@@ -277,7 +277,7 @@ function loadFunctionCategories() {
 
                 const categoryHeader = document.createElement('div');
                 categoryHeader.classList.add('function-title');
-                categoryHeader.innerHTML = `<input type="checkbox" class="function-checkbox" onchange="toggleCategoryFunctions(this)"> ${category} ▼`;
+                categoryHeader.innerHTML = `<input type="checkbox" class="function-checkbox" onchange="toggleCategoryFunctions(this)"> ${category} `;
 
                 // Create Function List (Initially Hidden)
                 const functionList = document.createElement('div');
