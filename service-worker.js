@@ -18,6 +18,32 @@ self.addEventListener("install", (event) => {
   );
 });
 
+//Fix for Uploaded
+self.addEventListener("fetch", (event) => {
+  if (event.request.url.includes("cards_data.json")) {
+    event.respondWith(
+      fetch(event.request).then((fetchResponse) => {
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, fetchResponse.clone());
+          return fetchResponse;
+        });
+      })
+    );
+  } else {
+    event.respondWith(
+      caches.match(event.request).then((response) => {
+        return response || fetch(event.request).then((fetchResponse) => {
+          return caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, fetchResponse.clone());
+            return fetchResponse;
+          });
+        });
+      })
+    );
+  }
+});
+
+
 // Fetch resources from cache when offline
 self.addEventListener("fetch", (event) => {
   event.respondWith(
