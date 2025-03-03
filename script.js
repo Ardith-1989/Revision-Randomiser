@@ -9,9 +9,9 @@ async function loadCardData() {
         let data = await response.json();
 
         console.log("JSON Data Loaded Successfully:", data); // Debugging log
-
-        contentGroups = data.contentGroups;
-        functionGroups = data.functionGroups;
+        
+        contentGroups = { ...data.contentGroups };
+        functionGroups = { ...data.functionGroups };
 
         updateGroupSelection();
         updateFunctionSelection();
