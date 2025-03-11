@@ -411,21 +411,44 @@
             "Write an exam question in which you could talk about this topic",
             "Create a visual organiser of this",
             "Name one source for this",
-            "Name two sources for this"
+            "Name two sources for this",
+            "Explain this using only words a 10 year old would understand", 
+            "Identify a key figure involved in this, and explain their importance", 
+            "Create 5 quiz questions about this topic", 
+            "Explain how this topic connects to another topic from a different module", 
+            
         ],
         "Events": [
             "Name 2 causes of this event",
             "Name 2 consequences of this event",
             "Write 5 sentences explaining the impact of this event",
             "Create a flow-chart of this event", 
-            "Create a timeline which contains this event"
+            "Create a timeline which contains this event",
+            "List two factors that made this event significant in the long term",
+            "Explain the most significant cause of this event in two sentences",
+            "List three short-term and three long-term effects of this event",
+            "Break this event into three stages and describe each one in a single sentence",
+            "Summarise the causes and consequences of this event in a single sentence",
+            "Summarise the causes and consequences of this event in a short paragraph", 
+            "Explain why this event is important in no more than 5 sentences. 
         ],
         "Sources": [
             "When and where was this source created?",
             "Why was this source created?",
             "Explain one factor that makes this source reliable",
             "Explain one factor that makes this source unreliable",
-            "List as many factors that affect the reliability of this source as you can"
+            "List as many factors that affect the reliability of this source as you can", 
+            "Name 3 topics which this source can help inform us about",
+            "Summarise in 5 bullets",
+            "Summarise in 3 bullets",
+            "Summarise in one sentence",
+            "Summarise this topic in exactly 20 words",
+            "3 min free recall",
+            "Write a 5-minute paragraph about this topic",
+            "Write an exam question in which you could talk about this topic",
+            "Create a visual organiser of this",
+            "Explain this using only words a 10 year old would understand", 
+            "Create 5 quiz questions about this topic"
         ]
     }
 }
