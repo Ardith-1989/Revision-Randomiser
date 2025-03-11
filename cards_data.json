@@ -397,7 +397,67 @@
                 "The character of Nero",
                 "The benefits of Imperial rule for the Inhabitants of Rome"
             ]
-        }
+        },
+		"Sources":{
+			"Sources for Greece": [
+				"Andocides",
+				"Aristophanes",
+				"Aristotle",
+				"Diodorus Siculus", 
+				"Euripides", 
+				"Gorgias", 
+				"Harpokration", 
+				"Isocrates", 
+				"Pausanias", 
+				"Plato", 
+				"Plutarch", 
+				"Herodotus", 
+				"The Old Oligarch", 
+				"Thucydides", 
+				"Xenophon", 
+				"The Serpent Column", 
+				"The Chalkis Decree", 
+				"The Thoudippose Decree", 
+				"Naqs-e Rustam", 
+				"The Xerxes Inscription", 
+				"The Buildings of the Acropolis", 
+				"The Buildings of the Agora", 
+				"The Buildings of Attica"
+			],
+			"Sources for Rome": [
+				"Q. Cicero",
+				"Caesar", 
+				"Cicero", 
+				"Sallust", 
+				"Appian", 
+				"Plutarch", 
+				"Suetonius", 
+				"Tacitus", 
+				"Cassius Dio", 
+				"Josephus", 
+				"Res Gestae", 
+				"Velleius Paterculus", 
+				"Virgil's Aeneid", 
+				"Horace's Odes", 
+				"Ovid's Fasti",
+				"Macrobius' Saturnalia", 
+				"Strabo",
+				"Pliny the Elder", 
+				"Coins"
+				"Triumphal Arch Inscription",
+				"Nikopolis Inscription",
+				"Augustan Lares Inscription",
+				"Altar to the Numen of Augustus",
+				"laudatio Agrippae",
+				"Edicts of Cyrene",
+				"Claudius’ Harbour Inscription",
+				"Procurator of Ostia Inscription",
+				"Emperor Worship at Gytheion Inscription",
+				"Genius of Tiberius Inscription",
+				"Letter of Claudius to the Alexandrians",
+				"Pomerium Extension Inscription"
+			]
+		}
     },
 
     "functionGroups": {
