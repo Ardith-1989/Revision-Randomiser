@@ -1,6 +1,6 @@
 {
     "contentGroups": {
-        "Relationships between Greek States and Non-Greek States": {
+    	"Relationships between Greek States and Non-Greek States": {
             "The Challenge of the Persian Empire, 492-479 BC": [
                 "The Ionian Revolt",
                 "Mardonius’ Campaign",
@@ -398,6 +398,7 @@
                 "The benefits of Imperial rule for the Inhabitants of Rome"
             ]
         },
+	    
 	"Sources":{
 		"Sources for Greece": [
 			"Andocides",
