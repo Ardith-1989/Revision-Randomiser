@@ -415,8 +415,7 @@
             "Explain this using only words a 10 year old would understand", 
             "Identify a key figure involved in this, and explain their importance", 
             "Create 5 quiz questions about this topic", 
-            "Explain how this topic connects to another topic from a different module", 
-            
+            "Explain how this topic connects to another topic from a different module"
         ],
         "Events": [
             "Name 2 causes of this event",
